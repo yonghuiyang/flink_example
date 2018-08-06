@@ -7,8 +7,10 @@ import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.util.Collector;
+
 import org.apache.flink.api.java.utils.ParameterTool;
 
+@SuppressWarnings("serial")
 public class SocketWindowWordCount {
 
     public static void main(String[] args) throws Exception {
@@ -40,7 +42,7 @@ public class SocketWindowWordCount {
                     }
                 })
                 .keyBy("word")
-                .timeWindow(Time.seconds(5), Time.seconds(1))
+                .timeWindow(Time.seconds(5))
                 .reduce(new ReduceFunction<WordWithCount>() {
                     @Override
                     public WordWithCount reduce(WordWithCount a, WordWithCount b) {
